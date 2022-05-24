@@ -3,9 +3,7 @@ import axios from "axios"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router"
 
-import TokenContext from "../../contexts/TokenContext"
-
-import { Container } from "./style"
+import { Container, Input, Button } from "./style"
 
 export default function RegisterForm() {
     const [formData, setFormData] = useState({
@@ -33,43 +31,39 @@ export default function RegisterForm() {
     return (
         <Container>
             <form onSubmit={handleRegistration}>
-                <label for="emailInput"></label>
-                <input
+                <Input
                     type="email"
                     id="emailInput"
                     placeholder="email"
                     value={formData.email}
                     name="email"
-                    onChange={InputChange}>
-                </input>
-                <label for="passwordInput"></label>
-                <input
+                    onChange={InputChange}
+                />
+                <Input
                     type="password"
                     id="passwordInput"
                     placeholder="senha"
                     value={formData.password}
                     name="password"
-                    onChange={InputChange}>
-                </input>
-                <label for="usernameInput"></label>
-                <input
+                    onChange={InputChange}
+                />
+                <Input
                     type="text"
                     id="usernameInput"
                     placeholder="nome"
                     value={formData.name}
                     name="name"
-                    onChange={InputChange}>
-                </input>
-                <label for="userPicInput"></label>
-                <input
+                    onChange={InputChange}
+                />
+                <Input
                     type="text"
                     id="userPicInput"
                     placeholder="foto"
                     value={formData.image}
                     name="image"
-                    onChange={InputChange}>
-                </input>
-                <button type="submit">Cadastrar</button>
+                    onChange={InputChange}
+                />
+                <Button type="submit">Cadastrar</Button>
             </form>
             <Link to={"/"}>
                 <span>Já tem uma conta? Faça login!</span>

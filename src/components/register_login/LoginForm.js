@@ -1,12 +1,12 @@
 import axios from "axios"
 import { Link } from "react-router-dom"
-import { Container } from "./style"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router"
 
 import TokenContext from "../../contexts/TokenContext"
 import UserContext from "../../contexts/UserContext";
 
+import { Container, Input, Button } from "./style"
 
 export default function LoginForm() {
     const [email, setEmail] = useState("");
@@ -36,23 +36,21 @@ export default function LoginForm() {
     return (
         <Container>
             <form onSubmit={handleLogin}>
-                <label for="emailInput"></label>
-                <input 
+                <Input 
                     type="email"
                     id="emailInput"
                     placeholder="email"
                     value={email}
-                    onChange={e => setEmail(e.target.value)}>
-                </input>
-                <label for="passwordInput"></label>
-                <input
+                    onChange={e => setEmail(e.target.value)}
+                />
+                <Input
                     type="password"
                     id="passwordInput"
                     placeholder="senha"
                     value={password}
-                    onChange={e => setPassword(e.target.value)}>
-                </input>
-                <button type="submit">Entrar</button>
+                    onChange={e => setPassword(e.target.value)}
+                />
+                <Button type="submit">Entrar</Button>
             </form>
             <Link to={"/cadastro"}>
                 <span>Não tem uma conta? Cadastre-se!</span>
