@@ -1,9 +1,11 @@
 import axios from "axios"
 import { Link } from "react-router-dom"
 import { Container } from "./style"
-import { useContext, useNavigate } from "react"
+import { useContext, useState } from "react"
+import { useNavigate } from "react-router"
 
 import TokenContext from "../../contexts/TokenContext"
+import UserContext from "../../contexts/UserContext";
 
 
 export default function LoginForm() {
@@ -12,6 +14,7 @@ export default function LoginForm() {
     const navigate = useNavigate();
 
     const { setToken } = useContext(TokenContext);
+    const { setUser } = useContext(UserContext);
 
     function handleLogin(e){
         const promisse= axios.post(
@@ -24,7 +27,7 @@ export default function LoginForm() {
         
         promisse.then((res) => {
             setToken(res.data.token);
-            setProfilePic(res.data.image);
+            setUser(res.data);
             navigate("/hoje");
         })
         promisse.catch(alert("Email ou senha erradas"))
@@ -32,7 +35,7 @@ export default function LoginForm() {
 
     return (
         <Container>
-            <form onSubmit="Logando">
+            <form onSubmit={handleLogin}>
                 <label for="emailInput"></label>
                 <input 
                     type="email"

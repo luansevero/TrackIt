@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, UNSAFE_RouteContext } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
 
 import TokenContext from "./contexts/TokenContext";
@@ -12,21 +12,21 @@ import HistoryPage from "./components/pages/HistoryPage";
 
 export default function App() {
     const [token, setToken] = useState("");
-    const [profilePic, setProfilePic] = useState("");
+    const [user, setUser] = useState(null);
 
     return (
-        <TokenContext.Provider value={{token, setToken}}>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="cadastro" element={<RegisterPage />} />
-                    <UserContext.Provider>
+        <TokenContext.Provider value={{ setToken }}>
+            <UserContext.Provider value={{ user, setUser }}>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="cadastro" element={<RegisterPage />} />
                         <Route path="/habitos" element={<HabitsPage />} />
                         <Route path="/hoje" element={<TodayPage />} />
                         <Route path="/historico" element={<HistoryPage />} />
-                    </UserContext.Provider>
-                </Routes>
-            </BrowserRouter>
+                    </Routes>
+                </BrowserRouter>
+            </UserContext.Provider>
         </TokenContext.Provider>
     )
 }

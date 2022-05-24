@@ -15,7 +15,7 @@ export default function RegisterForm() {
                     id="emailInput"
                     placeholder="email"
                     value="userEmail"
-                    onChange={e => x}>
+                    /*onChange={e => x}*/>
                 </input>
                 <label for="passwordInput"></label>
                 <input
@@ -23,7 +23,7 @@ export default function RegisterForm() {
                     id="passwordInput"
                     placeholder="senha"
                     value="userPassword"
-                    onChange={e => x}>
+                    /*onChange={e => x}*/>
                 </input>
                 <label for="usernameInput"></label>
                 <input
@@ -31,7 +31,7 @@ export default function RegisterForm() {
                     id="usernameInput"
                     placeholder="nome"
                     value="username"
-                    onChange={e => x}>
+                    /*onChange={e => x}*/>
                 </input>
                 <label for="userPicInput"></label>
                 <input
@@ -39,7 +39,7 @@ export default function RegisterForm() {
                     id="userPicInput"
                     placeholder="foto"
                     value="userPic"
-                    onChange={e => x}>
+                    /*onChange={e => x}*/>
                 </input>
                 <button type="submit">Cadastrar</button>
             </form>
