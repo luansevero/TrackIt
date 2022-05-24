@@ -6,9 +6,8 @@ import logoName from "../../assets/TrackIt.png"
 export default function HomeLogo(){
     return(
         <Section>
-            
-            <img src={logo}/>
-            <img src={logoName}/>
+            <img src={logo} alt="TrackItLogo"/>
+            <img src={logoName} alt="TrackIt"/>
         </Section>
     )
 }
