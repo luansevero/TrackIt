@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import HomePage from "./Pages/HomePage"
-import RegisterPage from "./Pages/RegisterPage"
-import HabitsPage from "./Pages/HabitsPage"
-import TodayPage from "./Pages/TodayPage"
-import HistoryPage from "./Pages/HistoryPage"
+import HomePage from "./components/pages/HomePage"
+import RegisterPage from "./components/pages/RegisterPage"
+import HabitsPage from "./components/pages/HabitsPage"
+import TodayPage from "./components/pages/TodayPage"
+import HistoryPage from "./components/pages/HistoryPage"
 
 export default function App() {
     return (
