@@ -1,5 +1,18 @@
-export default function HistoryPage(){
+import styled from "styled-components"
+
+import TopBar from "../logged/TopBar"
+import FooterNav from "../logged/FooterNav"
+
+import {Body, Main} from "../logged/style"
+
+export default function HabitsPage(){
     return(
-        "Sou a página History"
+        <Body>
+            <TopBar />
+            <Main>
+
+            </Main>
+            <FooterNav />
+        </Body>
     )
 }

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom"
 
 
 import TopBar from "../logged/TopBar"
@@ -6,12 +5,17 @@ import FooterNav from "../logged/FooterNav"
 import check from "../../assets/Vector.png"
 
 import styled from "styled-components"
+import { Body, Main } from "../logged/style"
 
-export default function TodayPage(){
-    return(
+export default function TodayPage() {
+    return (
         <Body>
             <TopBar />
             <Main>
+                <Header>
+                    <h1>Quarta, 25/05</h1>
+                    <h2 dontmadeit="sim">Nenhum hábito concluído ainda</h2>
+                </Header>
                 <Habits>
                     <HabitsInfoContainer>
                         <h2>Ler 1 capítulo de livro</h2>
@@ -25,22 +29,20 @@ export default function TodayPage(){
         </Body>
     )
 }
-const Body = styled.div`
-    background: #F2F2F2;
-    width: 100%;
-    height: 100vh;
-    header,
-    footer{
-        width: 100%;
-        height: 70px;
+
+const Header = styled.section`
+    font-weight: 400;
+    h1{
+        font-size: 22.976px;
+        line-height: 29px;
+        color: #126BA5; 
     }
-`
-const Main = styled.main`
-    display:flex;
-    flex-direction: column;
-    heigth: 100%;
-    width: 100%;
-    padding: 100px 18px;
+    h2{
+        font-size: 17.976px;
+        line-height: 22px;
+        color: #${props => props.dontmadeit === "sim" ? "BABABA" : "8FC549"};
+        margin-bottom: 28px;
+    }
 `
 const Habits = styled.section`
     display:flex;
