@@ -1,59 +1,38 @@
 import styled from "styled-components"
-import {useState} from "react"
+import {useState, useContext, useEffect} from "react"
+
+import TokenContext from "../../contexts/TokenContext"
+
 import TopBar from "../logged/TopBar"
 import FooterNav from "../logged/FooterNav"
 import WeekCreator from "../logged/WeekCreator"
+import CreateHabits from "./habitspage/CreateHabits"
 
 import { Body, Main, SectionInfo, Title } from "../logged/style"
 import {Input} from "../register_login/style"
 
 export default function HabitsPage() {
+    const { token } = useContext(TokenContext)
     const [haveHabits, setHaveHabits] = useState(false);
-    const[habitCreation, setHabitCreation] = useState(false);
-    const [habit, setHabit] = useState("");
+    const [allHabits, setAllHabits] = useState([]);
 
-    function createHabits(){
-        setHabitCreation(!habitCreation);
-    }
-    function cancelCreation(){
-        setHabitCreation(!habitCreation);
-    }
-    function saveCreation(){
-        setHabitCreation(!habitCreation);
-        setHaveHabits(true);
-    }
-    const days = ["domingo", "segunda", "terça", "quarta", "quinta", "sexta", "sábado"]
-    const [daysSelected, setDaysSelected] = useState([])
+    /*useEffect(()=>{
+        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", token)
+
+        promisse.then((res) => {
+            setAllHabits(res);
+        }
+        )
+    }, [])*/
+
+
+    
 
     return (
         <Body>
             <TopBar />
             <Main>
-                <CreateSection>
-                    <Container>
-                        <Title>Meus Hábitos</Title>
-                        <button onClick={createHabits}>+</button>
-                    </Container>
-                    {habitCreation
-                    ? <HabitCard>
-                        <Input
-                        value={habit}
-                        placeholder="nome do hábito"
-                        onChange={e => setHabit(e.target.value)}
-                        />
-                        <div>
-                            {days.map((e, index) => 
-                                <WeekCreator key={index} dayId={index} dayName={e} setDaysSelected={setDaysSelected} daysSelected={daysSelected}/>
-                            )}
-                        </div>
-                        <div>
-                        <CardButton className="cancel" onClick={cancelCreation}>Cancelar</CardButton>
-                        <CardButton className="save" onClick={saveCreation}>Salvar</CardButton>
-                        </div>
-                    </HabitCard>
-                    : ""
-                    }
-                </CreateSection>
+                <CreateHabits setHaveHabits={setHaveHabits}/>
                 {haveHabits
                     ? ""
                     : <SectionInfo>
@@ -61,7 +40,6 @@ export default function HabitsPage() {
                     </SectionInfo>
                 }
             </Main>
-
             <FooterNav />
         </Body>
     )
