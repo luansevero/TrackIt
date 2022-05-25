@@ -2,6 +2,7 @@ import { Link } from "react-router-dom"
 
 
 import TopBar from "../logged/TopBar"
+import FooterNav from "../logged/FooterNav"
 import check from "../../assets/Vector.png"
 
 import styled from "styled-components"
@@ -20,11 +21,7 @@ export default function TodayPage(){
                     <CheckList><img src={check} alt="checj" /></CheckList>
                 </Habits>
             </Main>
-            <FooterNav>
-                <Link to={"/habitos"}><NavButtons>Histórico</NavButtons></Link>
-                <Link to={"/hoje"}><NavButtons>Hoje</NavButtons></Link>
-                <Link to={"/historico"}><NavButtons>Hábitos</NavButtons></Link>
-            </FooterNav>
+            <FooterNav />
         </Body>
     )
 }
@@ -44,23 +41,6 @@ const Main = styled.main`
     heigth: 100%;
     width: 100%;
     padding: 100px 18px;
-`
-const FooterNav = styled.footer`
-    background: #FFFFFF;
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 33px 0;
-    left: 0;
-    bottom: 0;
-`
-const NavButtons = styled.button`
-    font-weight: 400;
-    font-size: 17.976px;
-    line-height: 22px;
-    text-align: center;
-    color: #52B6FF;
 `
 const Habits = styled.section`
     display:flex;
