@@ -5,15 +5,15 @@ import TokenContext from "../../contexts/TokenContext"
 
 import TopBar from "../logged/TopBar"
 import FooterNav from "../logged/FooterNav"
-import WeekCreator from "../logged/WeekCreator"
 import CreateHabits from "./habitspage/CreateHabits"
+import AllHabits from "./habitspage/AllHabits"
 
 import { Body, Main, SectionInfo, Title } from "../logged/style"
-import {Input} from "../register_login/style"
+
 
 export default function HabitsPage() {
     const { token } = useContext(TokenContext)
-    const [haveHabits, setHaveHabits] = useState(false);
+    const [haveHabits, setHaveHabits] = useState(true);
     const [allHabits, setAllHabits] = useState([]);
 
     /*useEffect(()=>{
@@ -34,7 +34,7 @@ export default function HabitsPage() {
             <Main>
                 <CreateHabits setHaveHabits={setHaveHabits}/>
                 {haveHabits
-                    ? ""
+                    ? <AllHabits setAllHabits={setAllHabits} allHabits={allHabits}/>
                     : <SectionInfo>
                         <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>
                     </SectionInfo>

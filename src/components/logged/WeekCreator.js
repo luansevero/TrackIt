@@ -9,7 +9,7 @@ export default function WeekCreator({ setDaysSelected, daysSelected, dayId, dayN
             setDaysSelected(daysSelected.filter((e) => e !== dayId));
         }
     }
-    
+
     return(
         <DayButtons
         dayId={dayId}
@@ -22,7 +22,7 @@ export default function WeekCreator({ setDaysSelected, daysSelected, dayId, dayN
     )
 }
 
-const DayButtons = styled.button`
+export const DayButtons = styled.button`
     margin: 0 2px;
     width: 30px;
     height: 30px;

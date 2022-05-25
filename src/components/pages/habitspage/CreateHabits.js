@@ -81,7 +81,7 @@ const Container = styled.div`
         border-radius: 4.63636px;
     }
 `
-const HabitCard = styled.div`
+export const HabitCard = styled.div`
     margin-top: 20px;
     background: #FFFFFF;
     border-radius: 5px;
