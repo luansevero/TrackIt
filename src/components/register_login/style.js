@@ -28,6 +28,8 @@ export const Container = styled.section`
     }
 `
 export const Input = styled.input`
+    height: 45px;
+    border-radius: 5px;
     padding-left: 11px;
     background: #FFFFFF;
     border: 1px solid #D5D5D5;
@@ -50,3 +52,4 @@ export const Button = styled.button`
     text-align: center;
     color: #FFFFFF;
 `
+
