@@ -4,7 +4,7 @@ import TokenContext from "../../contexts/TokenContext"
 
 import TopBar from "../logged/TopBar"
 import FooterNav from "../logged/FooterNav"
-import check from "../../assets/Vector.png"
+import TodayHabits from "./todaypage/TodayHabits"
 
 import styled from "styled-components"
 import { Body, Main } from "../logged/style"
@@ -12,19 +12,20 @@ import Loading from "../loadings/PageLoading"
 
 export default function TodayPage() {
 
-    const [isLoading, setIsLoading] = useState(true)
-    const { token } = useContext(TokenContext)
+    const [isLoading, setIsLoading] = useState(true);
+    const { token } = useContext(TokenContext);
+    const [dailyHabits, setDailyHabits] = useState([]);
 
     useEffect(() => {
         const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", token);
         promisse.then((res) => {
-            console.log("Oi")
+            setDailyHabits(res.data)
             setIsLoading(false)
         })
         promisse.catch((res) => {
-
+            
         })
-    })
+    }, [])
 
 
     return (
@@ -38,14 +39,8 @@ export default function TodayPage() {
                 </Header>
                 {isLoading
                     ? <Loading />
-                    : <Habits>
-                        <HabitsInfoContainer>
-                            <h2>Ler 1 capítulo de livro</h2>
-                            <p>Sequência atual: 3 dias</p>
-                            <p>Seu recorde: 5 dias</p>
-                        </HabitsInfoContainer>
-                        <CheckList><img src={check} alt="checj" /></CheckList>
-                    </Habits>}
+                    : <TodayHabits dailyHabits={dailyHabits} setDailyHabits={setDailyHabits}/>
+                }
             </Main>
             <FooterNav />
         </Body>
@@ -66,42 +61,4 @@ const Header = styled.section`
         margin-bottom: 28px;
     }
 `
-const Habits = styled.section`
-    display:flex;
-    justify-content: space-between;
-    width: 340px;
-    min-height: 94px;
-    padding: 13px;
-    background: #FFFFFF;
-    border-radius: 5px;
-    margin: 5px 0;
-    :first-of-type{
-        margin-top: 0px;
-    }
-    :last-of-type{
-        margin-bottom: 0px;
-    }
-`
-const HabitsInfoContainer = styled.div`
-    margin-right: 13px;
-    h2,p{
-        font-weight: 400;
-        color: #666666;
-    }
-    h2{
-        font-size: 19.976px;
-        line-height: 25px;
-        margin-bottom: 7px;
-    }
-    p{
-        font-size: 12.976px;
-        line-height: 16px;
-    }
-`
-const CheckList = styled.button`
-    width: 69px;
-    height: 69px;
-    background: #EBEBEB;
-    border: 1px solid #E7E7E7;
-    border-radius: 5px;
-`
+
