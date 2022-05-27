@@ -35,6 +35,7 @@ export const Header = styled.header`
     .userProfile{
         width: 51px;
         height: 51px;
+        border-radius: 51px;
     }
 `
 

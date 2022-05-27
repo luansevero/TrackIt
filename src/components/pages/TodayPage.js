@@ -13,21 +13,15 @@ export default function TodayPage() {
 
     const [isLoading, setIsLoading] = useState(true)
     const { token } = useContext(TokenContext)
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }
 
     useEffect(() => {
-        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
+        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", token);
         promisse.then((res) => {
             console.log("Oi")
-            console.log(config)
             setIsLoading(false)
         })
         promisse.catch((res) => {
-            console.log(config)
+
         })
     })
 

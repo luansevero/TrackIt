@@ -3,6 +3,7 @@ import axios from "axios"
 import {useState, useContext, useEffect} from "react"
 
 import TokenContext from "../../contexts/TokenContext"
+import UserContext from "../../contexts/UserContext"
 
 import TopBar from "../logged/TopBar"
 import FooterNav from "../logged/FooterNav"
@@ -13,38 +14,34 @@ import { Body, Main, SectionInfo, Title } from "../logged/style"
 
 
 export default function HabitsPage() {
-    const { token } = useContext(TokenContext)
-    const [haveHabits, setHaveHabits] = useState(false);
+    const { token } = useContext(TokenContext);
+    const { user } = useContext(UserContext);
     const [allHabits, setAllHabits] = useState([]);
-    const config = {
-        headers: {
-            Authorization: `Bearer ${token}`        
-        }
-    }
-    console.log(config)
+    console.log(user.image)
 
     useEffect(()=>{
-        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
+        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", token)
 
         promisse.then((res) => {
-            setAllHabits(res);
-            if(allHabits.length > 0){
-                setHaveHabits(true)
-            }
+            setAllHabits(res.data);
         }
         )
-    }, [])
+    }, []) //Funcionando
 
-
+    function refreshHabits(props){
+        console.log(props)
+        setAllHabits(...allHabits, props)
+        console.log(allHabits)
+    }
     
 
     return (
         <Body>
-            <TopBar />
+            <TopBar userSrc={user.image}/>
             <Main>
-                <CreateHabits setHaveHabits={setHaveHabits}/>
-                {haveHabits
-                    ? <AllHabits setAllHabits={setAllHabits} allHabits={allHabits} config={config}/>
+                <CreateHabits refreshHabits={refreshHabits}/>
+                {(allHabits.length > 0)
+                    ? <AllHabits allHabits={allHabits} refreshHabits={refreshHabits} setAllHabits={setAllHabits}/>
                     : <SectionInfo>
                         <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>
                     </SectionInfo>

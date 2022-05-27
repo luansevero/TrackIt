@@ -24,10 +24,12 @@ export default function LoginForm() {
         const promisse= axios.post(
             "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", formData
         );
-        
         promisse.then((res) => {
-            setToken(res.data.token);
-            console.log(token)
+            setToken({
+                headers:{
+                    Authorization: `Bearer ` + res.data.token
+                }
+            })
             setUser(res.data);
             navigate("/hoje");
         })

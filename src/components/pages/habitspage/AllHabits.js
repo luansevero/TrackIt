@@ -1,19 +1,22 @@
 import styled from "styled-components";
 import axios from "axios";
+import { useContext } from "react";
 
+import TokenContext from "../../../contexts/TokenContext";
 import { DayButtons } from "../../logged/WeekCreator";
 
-export default function AllHabits({ setAllHabits, allHabits, config }) {
+export default function AllHabits({setAllHabits, allHabits, refreshHabits }) {
     const days = ["d", "s", "t", "q", "q", "s", "s"];
+    const { token } = useContext(TokenContext) ;
 
     function deleteHabit(habitId) {
         if (window.confirm(`Tem certeza que deseja excluir esse hábito?`)) {
-            const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}`, config)
+            const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}`, token)
             promisse.then(() => {
-                const reload = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
+                const reload = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", token)
 
-                reload.then(() => {
-                    setAllHabits()
+                reload.then((res) => {
+                    setAllHabits(res.data)
                 })
             }
             )

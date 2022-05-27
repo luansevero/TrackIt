@@ -9,12 +9,13 @@ import WeekCreator from "../../logged/WeekCreator";
 import { Title } from "../../logged/style";
 import { Input } from "../../register_login/style";
 
-export default function CreateHabits({ setHaveHabits }) {
-    const { token } = useContext(TokenContext)
+export default function CreateHabits({ refreshHabits }) {
+    const { token } = useContext(TokenContext);
     const[habitCreation, setHabitCreation] = useState(false);
     const [habit, setHabit] = useState("");
     const days = ["d", "s", "t", "q", "q", "s", "s"]
     const [daysSelected, setDaysSelected] = useState([])
+
     function createHabits(){
         setHabitCreation(!habitCreation);
     }
@@ -23,11 +24,13 @@ export default function CreateHabits({ setHaveHabits }) {
     }
     function saveCreation(){
         setHabitCreation(!habitCreation);
-        setHaveHabits(true);
         const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", {
             name: habit,
             days: daysSelected
         }, token)
+        promisse.then((res) => {
+            refreshHabits(res.data)
+        })
     }
     
     return (
