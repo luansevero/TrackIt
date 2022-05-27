@@ -1,4 +1,5 @@
 import styled from "styled-components"
+import axios from "axios"
 import {useState, useContext, useEffect} from "react"
 
 import TokenContext from "../../contexts/TokenContext"
@@ -13,17 +14,26 @@ import { Body, Main, SectionInfo, Title } from "../logged/style"
 
 export default function HabitsPage() {
     const { token } = useContext(TokenContext)
-    const [haveHabits, setHaveHabits] = useState(true);
+    const [haveHabits, setHaveHabits] = useState(false);
     const [allHabits, setAllHabits] = useState([]);
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`        
+        }
+    }
+    console.log(config)
 
-    /*useEffect(()=>{
-        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", token)
+    useEffect(()=>{
+        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
 
         promisse.then((res) => {
             setAllHabits(res);
+            if(allHabits.length > 0){
+                setHaveHabits(true)
+            }
         }
         )
-    }, [])*/
+    }, [])
 
 
     
@@ -34,7 +44,7 @@ export default function HabitsPage() {
             <Main>
                 <CreateHabits setHaveHabits={setHaveHabits}/>
                 {haveHabits
-                    ? <AllHabits setAllHabits={setAllHabits} allHabits={allHabits}/>
+                    ? <AllHabits setAllHabits={setAllHabits} allHabits={allHabits} config={config}/>
                     : <SectionInfo>
                         <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>
                     </SectionInfo>

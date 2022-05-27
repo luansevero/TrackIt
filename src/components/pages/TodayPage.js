@@ -1,4 +1,6 @@
-
+import axios from "axios"
+import { useContext, useEffect, useState } from "react"
+import TokenContext from "../../contexts/TokenContext"
 
 import TopBar from "../logged/TopBar"
 import FooterNav from "../logged/FooterNav"
@@ -8,24 +10,52 @@ import styled from "styled-components"
 import { Body, Main } from "../logged/style"
 
 export default function TodayPage() {
+
+    const [isLoading, setIsLoading] = useState(true)
+    const { token } = useContext(TokenContext)
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    useEffect(() => {
+        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
+        promisse.then((res) => {
+            console.log("Oi")
+            console.log(config)
+            setIsLoading(false)
+        })
+        promisse.catch((res) => {
+            console.log(config)
+        })
+    })
+
+
     return (
         <Body>
-            <TopBar />
-            <Main>
-                <Header>
-                    <h1>Quarta, 25/05</h1>
-                    <h2 dontmadeit="sim">Nenhum hábito concluído ainda</h2>
-                </Header>
-                <Habits>
-                    <HabitsInfoContainer>
-                        <h2>Ler 1 capítulo de livro</h2>
-                        <p>Sequência atual: 3 dias</p>
-                        <p>Seu recorde: 5 dias</p>
-                    </HabitsInfoContainer>
-                    <CheckList><img src={check} alt="checj" /></CheckList>
-                </Habits>
-            </Main>
-            <FooterNav />
+            {isLoading
+                ? ""
+                : <>
+                    <TopBar />
+                    <Main>
+                        <Header>
+                            <h1>Quarta, 25/05</h1>
+                            <h2 dontmadeit="sim">Nenhum hábito concluído ainda</h2>
+                        </Header>
+                        <Habits>
+                            <HabitsInfoContainer>
+                                <h2>Ler 1 capítulo de livro</h2>
+                                <p>Sequência atual: 3 dias</p>
+                                <p>Seu recorde: 5 dias</p>
+                            </HabitsInfoContainer>
+                            <CheckList><img src={check} alt="checj" /></CheckList>
+                        </Habits>
+                    </Main>
+                    <FooterNav />
+                </>
+            }
+
         </Body>
     )
 }

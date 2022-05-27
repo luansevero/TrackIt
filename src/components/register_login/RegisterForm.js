@@ -12,16 +12,22 @@ export default function RegisterForm() {
         image: "",
         password: ""
     });
+    console.log(formData)
     const navigate = useNavigate();
 
     function handleRegistration(e){
+        e.preventDefault();
+
         const promisse = axios.post(
             "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up", 
             formData
         );
 
-        promisse.then(navigate("/"));
-        promisse.catch(alert("Registro não foi efetuado com sucesso"))
+        promisse.then((res) => {
+            navigate("/")
+        });
+
+        promisse.catch((erro) => {alert("Registro não foi efetuado com sucesso")});
     }
 
     function InputChange(e){

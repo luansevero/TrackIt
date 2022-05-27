@@ -15,7 +15,7 @@ export default function App() {
     const [user, setUser] = useState(null);
 
     return (
-        <TokenContext.Provider value={{ setToken }}>
+        <TokenContext.Provider value={{ setToken, token }}>
             <UserContext.Provider value={{ user, setUser }}>
                 <BrowserRouter>
                     <Routes>

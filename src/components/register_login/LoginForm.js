@@ -9,28 +9,33 @@ import UserContext from "../../contexts/UserContext";
 import { Container, Input, Button } from "./style"
 
 export default function LoginForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    })
     const navigate = useNavigate();
-
-    const { setToken } = useContext(TokenContext);
+    console.log(formData)
+    const { setToken, token } = useContext(TokenContext);
     const { setUser } = useContext(UserContext);
 
     function handleLogin(e){
+        e.preventDefault();
+
         const promisse= axios.post(
-            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login",
-            {
-                email: email,
-                password: password
-            }
+            "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login", formData
         );
         
         promisse.then((res) => {
             setToken(res.data.token);
+            console.log(token)
             setUser(res.data);
             navigate("/hoje");
         })
-        promisse.catch(alert("Email ou senha erradas"))
+        promisse.catch(() => {alert("Email ou senha erradas")})
+    }
+
+    function InputChange(e){
+        setFormData({...formData, [e.target.name]: e.target.value });
     }
 
     return (
@@ -40,15 +45,17 @@ export default function LoginForm() {
                     type="email"
                     id="emailInput"
                     placeholder="email"
-                    value={email}
-                    onChange={e => setEmail(e.target.value)}
+                    value={formData.email}
+                    name="email"
+                    onChange={InputChange}
                 />
                 <Input
                     type="password"
                     id="passwordInput"
                     placeholder="senha"
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
+                    value={formData.password}
+                    name="password"
+                    onChange={InputChange}
                 />
                 <Button type="submit">Entrar</Button>
             </form>

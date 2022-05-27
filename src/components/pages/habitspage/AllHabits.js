@@ -1,17 +1,20 @@
 import styled from "styled-components";
+import axios from "axios";
 
 import { DayButtons } from "../../logged/WeekCreator";
 
-export default function AllHabits({setAllHabits, allHabits}) {
-    const days = ["d","s","t","q","q","s","s"];
+export default function AllHabits({ setAllHabits, allHabits, config }) {
+    const days = ["d", "s", "t", "q", "q", "s", "s"];
 
-    function deleteHabit(habitId){
-        if(window.confirm(`Tem certeza que deseja excluir esse hábito?`)){
-            const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}`, token);
-            promisse.then( () => {
-                const reload = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", token)
+    function deleteHabit(habitId) {
+        if (window.confirm(`Tem certeza que deseja excluir esse hábito?`)) {
+            const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${habitId}`, config)
+            promisse.then(() => {
+                const reload = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
 
-                reload.then(setAllHabits())
+                reload.then(() => {
+                    setAllHabits()
+                })
             }
             )
         }
@@ -20,17 +23,17 @@ export default function AllHabits({setAllHabits, allHabits}) {
     return (
         <Section>
             {allHabits.map((habits) => {
-               return( <HabitCard key={habits.id}>
+                return (<HabitCard key={habits.id}>
                     <Left>
                         <h2>{habits.name}</h2>
                         {days.map((e, index) => {
-                            return(
-                            <DayButtons
-                                dayId={index}
-                                daysSelected={habits.days}
-                            >
-                                {e[0].toUpperCase()}
-                            </DayButtons>
+                            return (
+                                <DayButtons
+                                    dayId={index}
+                                    daysSelected={habits.days}
+                                >
+                                    {e[0].toUpperCase()}
+                                </DayButtons>
                             )
                         })}
                     </Left>
@@ -38,7 +41,7 @@ export default function AllHabits({setAllHabits, allHabits}) {
                         <button onClick={() => deleteHabit(habits.id)}>X</button>
                     </Right>
                 </HabitCard>
-               )
+                )
             })}
         </Section>
 
