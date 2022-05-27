@@ -8,6 +8,7 @@ import check from "../../assets/Vector.png"
 
 import styled from "styled-components"
 import { Body, Main } from "../logged/style"
+import Loading from "../loadings/PageLoading"
 
 export default function TodayPage() {
 
@@ -28,28 +29,25 @@ export default function TodayPage() {
 
     return (
         <Body>
-            {isLoading
-                ? ""
-                : <>
-                    <TopBar />
-                    <Main>
-                        <Header>
-                            <h1>Quarta, 25/05</h1>
-                            <h2 dontmadeit="sim">Nenhum hábito concluído ainda</h2>
-                        </Header>
-                        <Habits>
-                            <HabitsInfoContainer>
-                                <h2>Ler 1 capítulo de livro</h2>
-                                <p>Sequência atual: 3 dias</p>
-                                <p>Seu recorde: 5 dias</p>
-                            </HabitsInfoContainer>
-                            <CheckList><img src={check} alt="checj" /></CheckList>
-                        </Habits>
-                    </Main>
-                    <FooterNav />
-                </>
-            }
 
+            <TopBar />
+            <Main>
+                <Header>
+                    <h1>Quarta, 25/05</h1>
+                    <h2 dontmadeit="sim">Nenhum hábito concluído ainda</h2>
+                </Header>
+                {isLoading
+                    ? <Loading />
+                    : <Habits>
+                        <HabitsInfoContainer>
+                            <h2>Ler 1 capítulo de livro</h2>
+                            <p>Sequência atual: 3 dias</p>
+                            <p>Seu recorde: 5 dias</p>
+                        </HabitsInfoContainer>
+                        <CheckList><img src={check} alt="checj" /></CheckList>
+                    </Habits>}
+            </Main>
+            <FooterNav />
         </Body>
     )
 }

@@ -1,10 +1,10 @@
 import styled from "styled-components"
 import axios from "axios"
-import {useState, useContext, useEffect} from "react"
+import { useState, useContext, useEffect } from "react"
 
 import TokenContext from "../../contexts/TokenContext"
-import UserContext from "../../contexts/UserContext"
 
+import Loading from "../loadings/PageLoading"
 import TopBar from "../logged/TopBar"
 import FooterNav from "../logged/FooterNav"
 import CreateHabits from "./habitspage/CreateHabits"
@@ -15,36 +15,41 @@ import { Body, Main, SectionInfo, Title } from "../logged/style"
 
 export default function HabitsPage() {
     const { token } = useContext(TokenContext);
-    const { user } = useContext(UserContext);
+    const [isLoading, setIsLoading] = useState(true)
     const [allHabits, setAllHabits] = useState([]);
-    console.log(user.image)
 
-    useEffect(()=>{
+    useEffect(() => {
         const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", token)
 
         promisse.then((res) => {
             setAllHabits(res.data);
+            setIsLoading(false)
         }
         )
     }, []) //Funcionando
 
-    function refreshHabits(props){
+    function refreshHabits(props) {
         console.log(props)
         setAllHabits(...allHabits, props)
-        console.log(allHabits)
     }
-    
+
 
     return (
         <Body>
-            <TopBar userSrc={user.image}/>
+            <TopBar />
             <Main>
-                <CreateHabits refreshHabits={refreshHabits}/>
-                {(allHabits.length > 0)
-                    ? <AllHabits allHabits={allHabits} refreshHabits={refreshHabits} setAllHabits={setAllHabits}/>
-                    : <SectionInfo>
-                        <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>
-                    </SectionInfo>
+                <CreateHabits refreshHabits={refreshHabits} />
+                {isLoading
+                    ? <Loading />
+                    : <>                    
+                    {(allHabits.length > 0)
+                        ? <AllHabits allHabits={allHabits} refreshHabits={refreshHabits} setAllHabits={setAllHabits} />
+                        : <SectionInfo>
+                            <h2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</h2>
+                        </SectionInfo>
+                    }
+                    </>
+
                 }
             </Main>
             <FooterNav />

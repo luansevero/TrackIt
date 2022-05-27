@@ -13,10 +13,14 @@ export const Body = styled.div`
 export const Main = styled.main`
     display:flex;
     flex-direction: column;
-    heigth: 100%;
+    height: 100%;
     width: 100%;
     padding: 100px 18px;
     font-weight: 400;
+    &.loading{
+        justify-content:center;
+        align-items:center;
+    }
 `
 export const Header = styled.header`
     display:flex;
