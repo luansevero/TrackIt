@@ -59,8 +59,8 @@ export const Input = styled.input`
         line-height: 25px;
         color: #DBDBDB;
     }
-    &:-webkit-autofill{
-        background: #ffffff !important;
+    input:-internal-autofill-selected{
+        background-color: #ffffff !important;
     }
 `
 export const Button = styled.button`

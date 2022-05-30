@@ -52,13 +52,16 @@ export default function AllHabits({setAllHabits, allHabits, refreshHabits }) {
     )
 }
 const Section = styled.section`
+    display:flex;
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
 `
 const HabitCard = styled.div`
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-    width: 100%;
+    width: 340px;
     min-height: 91px;
     background: #FFFFFF;
     border-radius: 5px;

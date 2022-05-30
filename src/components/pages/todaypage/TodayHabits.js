@@ -42,6 +42,7 @@ export default function TodayHabits({ habit, refreshHabits, progressPercentage }
     }
 
     return (
+        <Section>
         <Habits key={habit.id} id={habit.id} >
             <HabitsInfoContainer currentColor={habit.done} highestColor={(habit.currentSequence === habit.highestSequence && habit.currentSequence != 0)}>
                 <h2>{habit.name}</h2>
@@ -52,10 +53,15 @@ export default function TodayHabits({ habit, refreshHabits, progressPercentage }
                 <img src={check} id={habit.id} />
             </CheckList>
         </Habits>
+        </Section>
     )
 }
-
-const Habits = styled.section`
+const Section = styled.section`
+    display: flex;
+    align-items:center;
+    flex-direction:column
+`
+const Habits = styled.div`
     display:flex;
     justify-content: space-between;
     margin: 0 auto;
@@ -75,7 +81,7 @@ const Habits = styled.section`
 const HabitsInfoContainer = styled.div`
     margin-right: 13px;
     h2,p,span{
-        max-width: 248px;
+        max-width: 240px;
         font-weight: 400;
     }
     h2{
