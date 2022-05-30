@@ -26,6 +26,23 @@ export const Container = styled.section`
         text-decoration-line: underline;
         color: #52B6FF;
     }
+    &.disable{
+        button,
+        input,
+        a{
+            pointer-events:none;
+        }
+        input{
+            background-color:#f2f2f2
+            background: #F2F2F2 !important;
+            color: #AFAFAF;
+        }
+        button{
+            display:flex;
+            align-items:center;
+            justify-content:center;
+        }
+    }
 `
 export const Input = styled.input`
     height: 45px;
@@ -41,6 +58,9 @@ export const Input = styled.input`
         font-size: 19.976px;
         line-height: 25px;
         color: #DBDBDB;
+    }
+    &:-webkit-autofill{
+        background: #ffffff !important;
     }
 `
 export const Button = styled.button`

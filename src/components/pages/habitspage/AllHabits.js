@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import axios from "axios";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 
 import TokenContext from "../../../contexts/TokenContext";
 import { DayButtons } from "../../logged/WeekCreator";
+
 
 export default function AllHabits({setAllHabits, allHabits, refreshHabits }) {
     const days = ["d", "s", "t", "q", "q", "s", "s"];
@@ -65,6 +66,7 @@ const HabitCard = styled.div`
     :last-of-type{
         margin-bottom: 10px;
     }
+    
 `
 const Left = styled.div`
     font-weight: 400;

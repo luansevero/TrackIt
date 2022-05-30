@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 import logo from "../../assets/trackit.jpeg"
-import logoName from "../../assets/TrackIt.png"
+import logoName from "../../assets/logo.png"
 
 export default function HomeLogo(){
     return(

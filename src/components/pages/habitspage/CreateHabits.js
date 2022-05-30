@@ -6,34 +6,38 @@ import TokenContext from "../../../contexts/TokenContext";
 
 import WeekCreator from "../../logged/WeekCreator";
 
+import { ThreeDots } from "react-loader-spinner";
 import { Title } from "../../logged/style";
 import { Input } from "../../register_login/style";
 
 export default function CreateHabits({ refreshHabits }) {
     const { token } = useContext(TokenContext);
-    const[habitCreation, setHabitCreation] = useState(false);
+    const [habitCreation, setHabitCreation] = useState(false);
     const [habit, setHabit] = useState("");
     const days = ["d", "s", "t", "q", "q", "s", "s"]
-    const [daysSelected, setDaysSelected] = useState([])
+    const [daysSelected, setDaysSelected] = useState([]);
+    const [isDisable, setIsDisable] = useState("active")
 
-    function createHabits(){
+    function createHabits() {
         setHabitCreation(!habitCreation);
     }
-    function cancelCreation(){
+    function cancelCreation() {
         setHabitCreation(!habitCreation);
     }
-    function saveCreation(e){
+    function saveCreation(e) {
         e.preventDefault()
-        setHabitCreation(!habitCreation);
+        setIsDisable("disable")
         const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", {
             name: habit,
             days: daysSelected
         }, token)
         promisse.then((res) => {
             refreshHabits()
+            setIsDisable("active")
+            setHabitCreation(!habitCreation);
         })
     }
-    
+
     return (
         <CreateSection>
             <Container>
@@ -41,7 +45,7 @@ export default function CreateHabits({ refreshHabits }) {
                 <button onClick={createHabits}>+</button>
             </Container>
             {habitCreation
-                ? <HabitCard>
+                ? <HabitCard className={isDisable}>
                     <Input
                         value={habit}
                         placeholder="nome do hábito"
@@ -54,7 +58,14 @@ export default function CreateHabits({ refreshHabits }) {
                     </Week>
                     <Buttons>
                         <CardButton className="cancel" onClick={cancelCreation}>Cancelar</CardButton>
-                        <CardButton className="save" onClick={saveCreation}>Salvar</CardButton>
+                        <CardButton className="save" onClick={saveCreation}>{isDisable == "active" 
+                        ? "Salvar" 
+                        : <ThreeDots
+                            height="20"
+                            width="50"
+                            color="#FFFFFF"
+                            ariaLabel='loading' />}
+                        </CardButton>
                     </Buttons>
                 </HabitCard>
                 : ""
@@ -95,6 +106,15 @@ export const HabitCard = styled.div`
     width: 100%;
     min-height: 180px;
     font-weight: 400;
+    &.disable{
+        button{
+            pointer-events: none;
+        }
+        input{
+            background: #f2f2f2;
+            color: #B3B3B3;
+        }
+    }
 `
 const Week = styled.div`
     margin-top: 8px;
@@ -130,6 +150,9 @@ const CardButton = styled.button`
         color: #52B6FF;
     }
     &.save{
+        display:flex;
+        align-items:center;
+        justify-content:center;
         margin-left: 23px;
         width: 84px;
         height: 35px;

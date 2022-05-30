@@ -58,6 +58,7 @@ export default function TodayHabits({ habit, refreshHabits, progressPercentage }
 const Habits = styled.section`
     display:flex;
     justify-content: space-between;
+    margin: 0 auto;
     width: 340px;
     min-height: 94px;
     padding: 13px;
