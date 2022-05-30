@@ -41,7 +41,7 @@ export default function AllHabits({setAllHabits, allHabits, refreshHabits }) {
                         })}
                     </Left>
                     <Right>
-                        <button onClick={() => deleteHabit(habits.id)}>X</button>
+                        <button onClick={() => deleteHabit(habits.id)}><ion-icon name="trash-outline"></ion-icon></button>
                     </Right>
                 </HabitCard>
                 )
@@ -63,7 +63,7 @@ const HabitCard = styled.div`
     border-radius: 5px;
     padding: 13px 15px;
     :last-of-type{
-        margin-bottom: 0px;
+        margin-bottom: 10px;
     }
 `
 const Left = styled.div`
@@ -78,9 +78,8 @@ const Left = styled.div`
 const Right = styled.div`
 
     button{
-        width: 10px;
-        height: 10px;
-        background-color:red;
+        width: 13px;
+        height: 15px;
     }
     button:hover{
         outline: none;

@@ -4,7 +4,7 @@ import UserContext from "../../contexts/UserContext"
 
 import { Header } from "./style"
 
-import logo from "../../assets/TrackIt.png"
+import logo from "../../assets/logo.png"
 
 export default function TopBar(){
     const { user } = useContext(UserContext)

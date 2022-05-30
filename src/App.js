@@ -13,10 +13,11 @@ import HistoryPage from "./components/pages/HistoryPage";
 export default function App() {
     const [token, setToken] = useState("");
     const [user, setUser] = useState(null);
+    const [progress, setProgress] = useState(0)
 
     return (
         <TokenContext.Provider value={{ setToken, token }}>
-            <UserContext.Provider value={{ user, setUser }}>
+            <UserContext.Provider value={{ user, setUser, progress, setProgress}}>
                 <BrowserRouter>
                     <Routes>
                         <Route path="/" element={<HomePage />} />

@@ -1,19 +1,24 @@
 import styled from "styled-components"
+import { useContext } from "react"
 
 import TopBar from "../logged/TopBar"
 import FooterNav from "../logged/FooterNav"
 
-import {Body, Main, Title, SectionInfo} from "../logged/style"
+import UserContext from "../../contexts/UserContext"
 
-export default function HabitsPage(){
-    return(
+import { Body, Main, Title, SectionInfo } from "../logged/style"
+
+export default function HabitsPage() {
+    const { progress } = useContext(UserContext)
+
+    return (
         <Body>
             <TopBar />
             <Main>
-                <CreateSection>
-                    <Title>Meus Hábitos</Title>
-                    <button>+</button>
-                </CreateSection>
+                <Title>Histórico</Title>
+                <SectionInfo>
+                    <h2>Em breve você poderá ver o histórico dos seus hábitos aqui!</h2>
+                </SectionInfo>
             </Main>
             <FooterNav />
         </Body>
@@ -29,6 +34,4 @@ const CreateSection = styled.section`
         text-align: center;
         color: #FFFFFF;
     }
-`
-const HabitsSection = styled.section`
 `

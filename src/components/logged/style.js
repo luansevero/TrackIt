@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Body = styled.div`
     background: #F2F2F2;
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
     header,
     footer{
         width: 100%;
@@ -58,6 +58,21 @@ export const Footer = styled.footer`
         background: #52B6FF;
         margin-bottom: 45px;
         color: #FFFFFF;
+        .CircularProgressbar-path {
+            stroke: #FFFFFF;
+            
+        }
+        .CircularProgressbar-trail {
+            stroke: #52B6FF;
+            
+        }
+        .CircularProgressbar-text {
+            fill: #FFFFFF;
+            
+        }
+        .CircularProgressbar-background {
+            fill: #52B6FF;
+        }
     }
 `
 export const NavButtons = styled.button`

@@ -3,6 +3,7 @@ import axios from "axios"
 import { useState, useContext, useEffect } from "react"
 
 import TokenContext from "../../contexts/TokenContext"
+import UserContext from "../../contexts/UserContext"
 
 import Loading from "../loadings/PageLoading"
 import TopBar from "../logged/TopBar"
@@ -10,11 +11,15 @@ import FooterNav from "../logged/FooterNav"
 import CreateHabits from "./habitspage/CreateHabits"
 import AllHabits from "./habitspage/AllHabits"
 
-import { Body, Main, SectionInfo, Title } from "../logged/style"
+import { Body, Main, SectionInfo} from "../logged/style"
+
 
 
 export default function HabitsPage() {
     const { token } = useContext(TokenContext);
+    const { progress } = useContext(UserContext);
+
+
     const [isLoading, setIsLoading] = useState(true)
     const [allHabits, setAllHabits] = useState([]);
 
@@ -28,9 +33,14 @@ export default function HabitsPage() {
         )
     }, []) //Funcionando
 
-    function refreshHabits(props) {
-        console.log(props)
-        setAllHabits(...allHabits, props)
+    function refreshHabits() {
+        setIsLoading(true)
+        const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", token)
+
+        promisse.then((res) => {
+            setAllHabits(res.data);
+            setIsLoading(false)
+        })
     }
 
 

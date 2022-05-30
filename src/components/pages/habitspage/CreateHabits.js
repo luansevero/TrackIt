@@ -22,14 +22,15 @@ export default function CreateHabits({ refreshHabits }) {
     function cancelCreation(){
         setHabitCreation(!habitCreation);
     }
-    function saveCreation(){
+    function saveCreation(e){
+        e.preventDefault()
         setHabitCreation(!habitCreation);
         const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", {
             name: habit,
             days: daysSelected
         }, token)
         promisse.then((res) => {
-            refreshHabits(res.data)
+            refreshHabits()
         })
     }
     
